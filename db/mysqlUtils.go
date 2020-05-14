@@ -29,16 +29,23 @@ func DBInit(){
 	db.LogMode(true)
 
 	//db.AutoMigrate(
-	//	&User{Name: "pt", Password: "123456", Email:"tongpang@webot.co"},
+	//	&User{Username: "pt", Password: "123456", Email:"tongpang@webot.co"},
 	//	&Document{},
 	//)
-	//db.Create(&User{Name: "pt", Password: "123456", Email:"tongpang@webot.co"})
+	//db.Create(&User{Username: "pt", Password: "123456", Email:"tongpang@webot.co"})
 	//db.Create(&Document{})
 	//db.DropTable(&User{})
 	//db.DropTable(&Document{})
 	db.CreateTable(&User{})
 	db.CreateTable(&Document{})
-	db.Model(&Document{}).AddForeignKey("uid", "user(id)", "RESTRICT", "RESTRICT")
+	//db.Model(&Document{}).AddForeignKey("uid", "user(id)", "RESTRICT", "RESTRICT")
 }
 
-
+func GetUserId(username string) uint{
+	var user User
+	q := db.Where("username = ?", username).First(&user)
+	if q.Error != nil{
+		return 0
+	}
+	return user.ID
+}

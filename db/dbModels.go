@@ -7,17 +7,16 @@ import (
 
 type User struct{
 	gorm.Model
-	//Id	uint	`gorm: "primary_key; AUTO_INCREMENT"`
-	Name	string	`gorm: "type:varchar(20); unique; not null"`
-	Password	string 	`gorm: "type:varchar(20); not null"`
-	Email	string 	`gorm: "type:varchar(50); not null"`
+	Username string `gorm:"type:varchar(20); unique; not null"`
+	Password string `gorm:"type:varchar(20); not null"`
+	Email    string `gorm:"type:varchar(50); not null; unique"`
 }
 
 type Document struct {
 	gorm.Model
-	Article	string
-	Author string
-	User	User	`gorm: "foreginkey: u_id;association_foreginkey:id"`
-	UserId	uint	`gorm: "column: uid"`
+	Title	string	`gorm:"type:varchar(20)"`
+	Article	string	`gorm:"type:text; not null"`
+	Author string	`gorm:"type:varchar(30); unique"`
+	Uid	uint
 	Timestamp	time.Time
 }
