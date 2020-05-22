@@ -77,8 +77,21 @@ func main() {
 	// http://localhost:8080
 	// http://localhost:8080/ping
 	// http://localhost:8080/hello
-
 	//app.Listen("0.0.0.0:5555")
+
+	//html := iris.HTML("./static/html", ".html")
+	//html.Layout("index.html")
+	//html.Reload(true)
+	//app.RegisterView(html)
+	app.HandleDir("/static", "./static")
+	app.Layout("static/index.html")
+
+	//app.Get("/", func(ctx iris.Context) {
+	//	ctx.ViewData("message", "Welcome!")
+	//	ctx.View("index.html")
+	//
+	//})
+
 	app.Run(
 		iris.Addr(":5555"),
 		iris.WithoutServerError(iris.ErrServerClosed),

@@ -16,7 +16,7 @@ type Document struct {
 	gorm.Model
 	Title	string	`gorm:"type:varchar(20)"`
 	Article	string	`gorm:"type:text; not null"`
-	Author string	`gorm:"type:varchar(30); unique"`
+	Author string	`gorm:"type:varchar(30);n not null"`
 	Uid	uint
 	Timestamp	time.Time
 }
