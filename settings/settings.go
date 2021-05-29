@@ -1,6 +1,5 @@
 package settings
 
-
 const (
 	MysqlUser     = "root"
 	MysqlPasswd   = "123456"

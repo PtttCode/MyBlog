@@ -2,21 +2,21 @@ package db
 
 import (
 	"github.com/jinzhu/gorm"
-	"time"
 )
 
-type User struct{
+type User struct {
 	gorm.Model
-	Username string `gorm:"type:varchar(20); unique; not null"`
+	Name     string `gorm:"type:varchar(20); not null; unique"`
 	Password string `gorm:"type:varchar(20); not null"`
 	Email    string `gorm:"type:varchar(50); not null; unique"`
+	UID      string `gorm:"primaryKey;type:char(36);autoIncrement:false"`
 }
 
 type Document struct {
 	gorm.Model
-	Title	string	`gorm:"type:varchar(20)"`
-	Article	string	`gorm:"type:text; not null"`
-	Author string	`gorm:"type:varchar(30);n not null"`
-	Uid	uint
-	Timestamp	time.Time
+	Title   string `gorm:"type:varchar(20)"`
+	Article string `gorm:"type:text; not null"`
+	DocUid  string `gorm:"type:char(36); not null; unique"`
+	Privacy int8   `gorm:"type:int8;default:0"`
+	UserUID string `gorm:"primaryKey;type:char(36);autoIncrement:false"`
 }
